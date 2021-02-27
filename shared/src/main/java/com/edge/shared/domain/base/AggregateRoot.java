@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @MappedSuperclass
-public  class AbstractAggregateRoot {
+public  class AggregateRoot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,5 +20,16 @@ public  class AbstractAggregateRoot {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Version
+    private Long version;
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }
