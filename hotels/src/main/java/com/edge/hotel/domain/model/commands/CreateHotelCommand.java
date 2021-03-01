@@ -1,5 +1,9 @@
 package com.edge.hotel.domain.model.commands;
 
+import com.edge.hotel.domain.model.aggregates.HotelFacilities;
+import com.edge.hotel.domain.model.aggregates.Rooms;
+
+import java.util.List;
 import java.util.Objects;
 
 public class CreateHotelCommand {
@@ -8,6 +12,8 @@ public class CreateHotelCommand {
     private String description;
     private String originalImagePath;
     private String displayImagePath;
+    private List<HotelFacilities> hotelFacilities;
+    private List<Rooms> rooms;
 
     public CreateHotelCommand(String name, String description, String originalImagePath, String displayImagePath) {
         this.name = name;

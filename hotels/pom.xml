@@ -11,7 +11,7 @@
 
 	<artifactId>hotels</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hotel</name>
+	<name>hotels</name>
 	<description>Hotel Service</description>
 
 	<properties>
