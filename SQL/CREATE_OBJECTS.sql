@@ -17,7 +17,7 @@ GO
 CREATE TABLE dbo.ROOMS(
     ID              INT IDENTITY PRIMARY KEY,
     HOTEL_ID        INT,
-    DISPLAY_NAME    INT,
+    NAME            VARCHAR(255),
     QUANTITY        INT,
     MAX_PRICE       INT,
     MIN_PRICE       INT,
@@ -42,6 +42,7 @@ CREATE TABLE dbo.HOTELS(
     ID              INT IDENTITY PRIMARY KEY,
     NAME            VARCHAR(50),
     DESCRIPTION     VARCHAR(100),
+    LOCALITY_ID     INT,
     ORIGINAL_IMAGE_PATH     VARCHAR(255),
     DISPLAY_IMAGE_PATH      VARCHAR(255),
     IS_ACTIVE       SMALLINT,

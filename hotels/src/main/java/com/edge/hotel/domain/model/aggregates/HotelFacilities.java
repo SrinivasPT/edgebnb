@@ -1,14 +1,12 @@
 package com.edge.hotel.domain.model.aggregates;
 
 import com.edge.shared.domain.base.EntityRoot;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
 import java.util.Objects;
 
 @Entity
 public class HotelFacilities extends EntityRoot {
-    @JsonProperty("facilityId")
     private Long facilityId;
 
     public HotelFacilities() {
@@ -18,8 +16,8 @@ public class HotelFacilities extends EntityRoot {
         return facilityId;
     }
 
-    public Long FacilityId() {
-        return facilityId;
+    public void setFacilityId(Long facilityId) {
+        this.facilityId = facilityId;
     }
 
     @Override

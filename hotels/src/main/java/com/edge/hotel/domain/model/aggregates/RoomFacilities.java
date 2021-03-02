@@ -8,7 +8,6 @@ import java.util.Objects;
 
 @Entity
 public class RoomFacilities extends EntityRoot {
-    @JsonProperty("facilityId")
     private Long facilityId;
 
     public Long getFacilityId() {

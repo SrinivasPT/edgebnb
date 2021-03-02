@@ -25,9 +25,15 @@ public class HotelController {
         return hotelService.createHotelv1(command);
     }
 
-    @PutMapping
-    public ResponseEntity<Long> updateHotel(@RequestBody CreateHotelCommand command) {
-        Long hotelId = hotelService.updateHotel(command);
+//    @PutMapping("v1")
+//    public ResponseEntity<Long> updateHotel(@RequestBody CreateHotelCommand command) {
+//        Long hotelId = hotelService.updateHotel(command);
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
+
+    @PutMapping("v2")
+    public ResponseEntity<Long> updateHotel(@RequestBody Hotels hotel) {
+        Long hotelId = hotelService.updateHotelv2(hotel);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

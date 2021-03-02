@@ -3,6 +3,7 @@ package com.edge.hotel.domain.model.aggregates;
 import com.edge.hotel.domain.model.commands.CreateHotelCommand;
 import com.edge.shared.domain.base.AggregateRoot;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,32 +14,47 @@ import java.util.List;
 
 @Entity
 public class Hotels extends AggregateRoot {
-    @JsonProperty("name")
     private String name;
-
-    @JsonProperty("localityId")
     private Long localityId;
-
-    @JsonProperty("description")
     private String description;
-
-    @JsonProperty("originalImagePath")
     private String originalImagePath;
-
-    @JsonProperty("displayImagePath")
     private String displayImagePath;
 
-    @JsonProperty("rooms")
+    @JsonProperty
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "hotel_id")
     private List<Rooms> rooms = new ArrayList<>();
 
-    @JsonProperty("hotelFacilities")
+    @JsonProperty
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "hotel_id")
     private List<HotelFacilities> hotelFacilities = new ArrayList<>();
 
     public Hotels() {
+    }
+
+    public Long getLocalityId() {
+        return localityId;
+    }
+
+    public void setLocalityId(Long localityId) {
+        this.localityId = localityId;
+    }
+
+    public List<Rooms> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Rooms> rooms) {
+        this.rooms = rooms;
+    }
+
+    public List<HotelFacilities> getHotelFacilities() {
+        return hotelFacilities;
+    }
+
+    public void setHotelFacilities(List<HotelFacilities> hotelFacilities) {
+        this.hotelFacilities = hotelFacilities;
     }
 
     public Hotels(CreateHotelCommand command) {
@@ -91,7 +107,7 @@ public class Hotels extends AggregateRoot {
                 ", description='" + description + '\'' +
                 ", originalImagePath='" + originalImagePath + '\'' +
                 ", displayImagePath='" + displayImagePath + '\'' +
-                ", rooms=" + rooms +
+//                ", rooms=" + rooms +
                 ", hotelFacilities=" + hotelFacilities +
                 '}';
     }
