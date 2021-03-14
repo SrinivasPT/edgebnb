@@ -11,22 +11,39 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Hotels extends AggregateRoot {
     private String name;
     private Long localityId;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hotels hotels = (Hotels) o;
+        return Objects.equals(name, hotels.name) && Objects.equals(localityId, hotels.localityId) && Objects.equals(description, hotels.description) && Objects.equals(originalImagePath, hotels.originalImagePath) && Objects.equals(displayImagePath, hotels.displayImagePath) && Objects.equals(rooms, hotels.rooms) && Objects.equals(hotelFacilities, hotels.hotelFacilities);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, localityId, description, originalImagePath, displayImagePath, rooms, hotelFacilities);
+    }
+
     private String description;
     private String originalImagePath;
     private String displayImagePath;
 
     @JsonProperty
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JoinColumn(name = "hotel_id")
     private List<Rooms> rooms = new ArrayList<>();
 
     @JsonProperty
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JoinColumn(name = "hotel_id")
     private List<HotelFacilities> hotelFacilities = new ArrayList<>();
 
@@ -46,7 +63,7 @@ public class Hotels extends AggregateRoot {
     }
 
     public void setRooms(List<Rooms> rooms) {
-        this.rooms = rooms;
+        this.rooms.addAll(rooms);
     }
 
     public List<HotelFacilities> getHotelFacilities() {
@@ -54,7 +71,7 @@ public class Hotels extends AggregateRoot {
     }
 
     public void setHotelFacilities(List<HotelFacilities> hotelFacilities) {
-        this.hotelFacilities = hotelFacilities;
+        this.hotelFacilities.addAll(hotelFacilities);
     }
 
     public Hotels(CreateHotelCommand command) {

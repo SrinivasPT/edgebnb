@@ -14,8 +14,7 @@ public class HotelService {
     @Autowired
     private HotelRepository hotelRepository;
 
-    @Autowired
-    private HotelMapper mapper;
+    private HotelMapper mapper = Mappers.getMapper(HotelMapper.class);
 
     public Long createHotel(CreateHotelCommand command) {
         Hotels hotels = new Hotels(command);
@@ -24,11 +23,12 @@ public class HotelService {
         return hotels.getId();
     }
 
-    public Long createHotelv1(Hotels hotel) {
-        System.out.println("hotel.toString() = " + hotel.toString());
-        hotel = hotelRepository.save(hotel);
-        System.out.println("Created new hotel and it's ID = " + hotel.getId());
-        return hotel.getId();
+    public Long createHotelv1(HotelsDto hotelsDto) {
+        System.out.println("hotel.toString() = " + hotelsDto.toString());
+        Hotels hotels = mapper.toEntity(hotelsDto);
+        hotels = hotelRepository.save(hotels);
+        System.out.println("Created new hotel and it's ID = " + hotels.getId());
+        return hotels.getId();
     }
 
 //    public Long updateHotel(CreateHotelCommand command) {
@@ -39,12 +39,12 @@ public class HotelService {
 //        return hotels.getId();
 //    }
 
-    public Long updateHotelv2(HotelsDto hotelsDto) {
+    public void updateHotelv2(HotelsDto hotelsDto) {
+        System.out.println("hotelsDto = " + hotelsDto);
         Hotels hotels = hotelRepository.getOne(hotelsDto.getId());
-        mapper.toEntity(hotelsDto);
+        hotels = mapper.toEntity(hotelsDto, hotels);
+        System.out.println("hotels = " + hotels);
         hotelRepository.save(hotels);
-        System.out.println("Created new hotel and it's ID = " + hotels.getId().toString());
-        return hotels.getId();
     }
 
 }

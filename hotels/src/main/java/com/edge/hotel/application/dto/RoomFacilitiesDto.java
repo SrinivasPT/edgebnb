@@ -6,4 +6,6 @@ import lombok.Data;
 public class RoomFacilitiesDto {
     private Long id;
     private Long facilityId;
+    private Long version;
+    private boolean isActive;
 }

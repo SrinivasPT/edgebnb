@@ -1,5 +1,6 @@
 package com.edge.hotel.interfaces.rest;
 
+import com.edge.hotel.application.dto.HotelsDto;
 import com.edge.hotel.application.internal.HotelService;
 import com.edge.hotel.domain.model.aggregates.Hotels;
 import com.edge.hotel.domain.model.commands.CreateHotelCommand;
@@ -20,7 +21,7 @@ public class HotelController {
     }
 
     @PostMapping("v2")
-    public Long createHotel(@RequestBody Hotels command) {
+    public Long createHotel(@RequestBody HotelsDto command) {
         System.out.println("command.toString() = " + command.toString());
         return hotelService.createHotelv1(command);
     }
@@ -32,8 +33,8 @@ public class HotelController {
 //    }
 
     @PutMapping("v2")
-    public ResponseEntity<Long> updateHotel(@RequestBody Hotels hotel) {
-        Long hotelId = hotelService.updateHotelv2(hotel);
+    public ResponseEntity<Long> updateHotel(@RequestBody HotelsDto hotelsDto) {
+        hotelService.updateHotelv2(hotelsDto);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

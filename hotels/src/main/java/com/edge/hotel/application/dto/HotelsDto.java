@@ -13,6 +13,8 @@ public class HotelsDto {
     private String description;
     private String originalImagePath;
     private String displayImagePath;
-    private List<RoomsDto> rooms = new ArrayList<>();
+    private List<RoomsDto> roomsDto = new ArrayList<>();
     private List<HotelFacilitiesDto> hotelFacilitiesDto = new ArrayList<>();
+    private Long version;
+    private boolean isActive;
 }

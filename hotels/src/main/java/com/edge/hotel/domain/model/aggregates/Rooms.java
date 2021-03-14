@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,15 @@ public class Rooms extends EntityRoot {
     @JsonProperty
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "room_id", nullable = false)
-    private List<RoomFacilities> roomFacilities;
+    private List<RoomFacilities> roomFacilities = new ArrayList<>();
+
+    public List<RoomFacilities> getRoomFacilities() {
+        return roomFacilities;
+    }
+
+    public void setRoomFacilities(List<RoomFacilities> roomFacilities) {
+        this.roomFacilities.addAll(roomFacilities);
+    }
 
     public Rooms() {
     }
@@ -88,4 +97,5 @@ public class Rooms extends EntityRoot {
 //                ", hotelFacilities=" + roomFacilities +
                 '}';
     }
+
 }
