@@ -24,6 +24,7 @@
 		<module>hotels</module>
 		<module>eureka-server</module>
 		<module>shared</module>
+		<module>gateway-server</module>
 	</modules>
 
 	<dependencyManagement>
